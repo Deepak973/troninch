@@ -1,0 +1,12 @@
+[profile.default]
+src = "src"
+out = "out"
+libs = ["lib"]
+
+[rpc_endpoints]
+sepolia = "https://eth-sepolia.g.alchemy.com/public"
+
+[etherscan]
+sepolia = { key = "JGWS1C3GSNW3GQYVU5AHMB5Y2I9KUI6YHW" }
+# See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+
