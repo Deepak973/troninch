@@ -22,7 +22,7 @@ This project implements a cross-chain escrow system using Ethereum (Sepolia test
 **Deploy Resolver and Escrow Factory:**
 
 ```bash
-forge script script/deploy/Deploy.s.sol --rpc-url sepolia --broadcast --verify -vvvv
+forge script script/deploy/deploy.s.sol --rpc-url sepolia --broadcast --verify -vvvv
 ```
 ````
 
@@ -34,8 +34,8 @@ forge script script/deploy/DeployUSDC.s.sol --rpc-url sepolia --broadcast -vvvv
 
 ### Deployed Addresses:
 
-- **Resolver**: `0x8F20f5F792825d72c7Ca29853e43A54c66c05F42`
-- **Escrow Factory**: `0x1493b1980F747deEa61c30C2C54730931c90FB47`
+- **Resolver**: `0x5E69CdDD16F334EB662601e2020501776cbb0589`
+- **Escrow Factory**: `0xAaF4a298fa52649DeFdbe4e8f8a0f5eAB8e2985E`
 - **USDC Token**: `0xaA329d7B6B8016C7e94642FD46EeF999C5DB3CAd`
 
 ---
@@ -56,9 +56,9 @@ source .env && tronbox migrate --network nile
 
 ### Deployed Addresses:
 
-- **Resolver**: `TAEM6EmHnNjncRNdKbdPBAnqT2yPNre18D`
-- **Escrow Factory**: `TLpKWuX44hCXcRZtPzj6VYKp4hpo9XBjHT`
-- **USDT Token**: `TM5ozNYWF9mPg4VFG3WbSxaML1ZCRPDk4w`
+- **Resolver**: `TZBq34odoSm8PyCYi8rNB45o1w9gfGADaA`
+- **Escrow Factory**: `TUZTGLzD7XqiNet7JpMsivcegkz71a8Wfy`
+- **USDT Token**: `TV5o5VX8CAGP18CwHpbbEd7VcjpRWSKFiK`
 
 ---
 
@@ -70,7 +70,4 @@ source .env && tronbox migrate --network nile
 
 ```
 
----
-
-Let me know if you want to add badges (e.g., Etherscan links), usage instructions, or architecture overview.
 ```
