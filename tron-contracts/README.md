@@ -1,82 +1,90 @@
-# Sample TronBox Project
+Here's an updated version of your **Tron README** tailored specifically to your current project, which includes deploying the **Resolver**, **EscrowFactory**, and **USDT token contract** to the **Nile testnet**.
 
-This is a bare-minimum TronBox project.
+---
 
-## Configuration
+# 🔁 Cross-Chain Swap – Tron Contracts
 
-Your configuration file is called `tronbox-config.js` and is located at the root of your project directory.
+This project contains smart contracts deployed on the **Tron Nile Testnet** that enable a cross-chain escrow mechanism between Ethereum Sepolia and Tron Nile. Contracts include:
 
-## Compiling
+- `EscrowFactory`
+- `Resolver`
+- `USDT Token (Mock)`
 
-To compile your contracts, use the following command:
+---
 
-```shell
+## 🧩 Contracts Deployed (Nile Testnet)
+
+| Contract      | Address                              |
+| ------------- | ------------------------------------ |
+| Resolver      | `TAEM6EmHnNjncRNdKbdPBAnqT2yPNre18D` |
+| EscrowFactory | `TLpKWuX44hCXcRZtPzj6VYKp4hpo9XBjHT` |
+| USDT Token    | `TM5ozNYWF9mPg4VFG3WbSxaML1ZCRPDk4w` |
+
+---
+
+## ⚙️ Setup & Configuration
+
+Update your private keys and endpoints in `.env`:
+
+```bash
+PRIVATE_KEY_NILE=your_private_key_here
+```
+
+Update `tronbox-config.js`:
+
+```js
+nile: {
+  privateKey: process.env.PRIVATE_KEY_NILE,
+  userFeePercentage: 100,
+  feeLimit: 1000000000,
+  fullHost: 'https://nile.trongrid.io',
+  network_id: '3',
+}
+```
+
+---
+
+## 📦 Compile Contracts
+
+```bash
 tronbox compile
 ```
 
-## Migration
+---
 
-The project comes pre-configured with four separate networks:
+## 🚀 Deploy Contracts to Nile
 
-- Mainnet (https://api.trongrid.io)
-- Shasta Testnet (https://api.shasta.trongrid.io)
-- Nile Testnet (https://nile.trongrid.io).
-- Localnet (http://127.0.0.1:9090)
+To deploy the contracts on **Nile**, run:
 
-### Mainnet
-
-To deploy your contracts to Mainnet, you can run the following:
-
-```shell
-tronbox migrate --network mainnet
+```bash
+source .env && tronbox migrate --network nile
 ```
 
-### Shasta Testnet
+To run a specific deployment file only (e.g., `3_mint_token.js`):
 
-Obtain test coin at https://shasta.tronex.io/
-
-To deploy your contracts to Shasta Testnet, you can run the following:
-
-```shell
-tronbox migrate --network shasta
+```bash
+source .env && tronbox migrate --f 3 --to 3 --network nile
 ```
 
-### Nile Testnet
+---
 
-Obtain test coin at https://nileex.io/join/getJoinPage
+## 🧪 Test Contracts
 
-To deploy your contracts to Nile Testnet, you can run the following:
-
-```shell
-tronbox migrate --network nile
+```bash
+tronbox test --network nile
 ```
 
-### Localnet
+---
 
-The TronBox Runtime Environment provides a complete development framework for Tron, including a private network for testing.
+## 📝 Notes
 
-Get tronbox/tre docker image at https://hub.docker.com/r/tronbox/tre
+- You can mint more USDT by calling the public `mint` function.
+- The deployed `USDT` contract gives 10,000 tokens to `msg.sender` during deployment.
 
-To deploy your contracts to Localnet, you can run the following:
+---
 
-```shell
-tronbox migrate
-```
+## 🌐 Related Resources
 
-## Testing
-
-To test your contracts, you can run the following:
-
-```shell
-tronbox test --network <mainnet|shasta|nile|development>
-```
-
-## Work with EVM
-
-TronBox supports deploying contracts on EVM-compatible blockchains.
-
-For more information, please refer to: https://developers.tron.network/reference/work-with-evm
-
-## Additional Resources
-
-For further learning, visit the official TronBox site at https://tronbox.io
+- [Tron Dev Portal](https://developers.tron.network)
+- [Nile Faucet](https://nileex.io/join/getJoinPage)
+- [TronBox Docs](https://tronbox.io)

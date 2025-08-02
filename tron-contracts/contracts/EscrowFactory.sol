@@ -8,9 +8,13 @@ contract EscrowFactory {
     event EscrowSrcDeployed(address indexed escrow);
     event EscrowDstDeployed(address indexed escrow);
 
-    function deployEscrowSrc(address taker, bytes32 hashlock, uint256 timelock) external payable returns (address) {
+    function deployEscrowSrc(address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
+        external
+        payable
+        returns (address)
+    {
         EscrowSrc escrow = new EscrowSrc();
-        escrow.initialize(msg.sender, taker, hashlock, timelock);
+        escrow.initialize(msg.sender, taker, hashlock, timelock, tokenAddress);
 
         if (msg.value > 0) {
             (bool sent,) = address(escrow).call{value: msg.value}("");
@@ -21,12 +25,16 @@ contract EscrowFactory {
         return address(escrow);
     }
 
-    function deployEscrowDst(address maker, address taker, bytes32 hashlock, uint256 timelock)
-        external
-        payable
-        returns (address)
-    {
-        EscrowDst escrow = new EscrowDst{value: msg.value}(maker, taker, hashlock, timelock);
+    function deployEscrowDst(
+        address maker,
+        address taker,
+        bytes32 hashlock,
+        uint256 timelock,
+        address tokenAddress,
+        uint256 amount
+    ) external returns (address) {
+        EscrowDst escrow = new EscrowDst(maker, taker, hashlock, timelock, tokenAddress, amount);
+
         emit EscrowDstDeployed(address(escrow));
         return address(escrow);
     }

@@ -974,10 +974,10 @@
     "3": {
       "events": {},
       "links": {},
-      "address": "417ea41ef7508519b3829170635b3df0b690687278",
-      "transactionHash": "a05881d2227d82e27965ece608b730da4093f4e41eff8854930523c8039bab9c"
+      "address": "41a23fc180cdc7348db4ec53f4e8a1691ca293bc2c",
+      "transactionHash": "8e6067b4b949837a61e7dcfb47e0da3366d9fb36db3a6d1c5733dfc45550cf1b"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2025-08-02T18:48:14.280Z"
+  "updatedAt": "2025-08-02T19:41:36.791Z"
 }

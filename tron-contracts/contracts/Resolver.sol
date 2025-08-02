@@ -2,8 +2,6 @@
 pragma solidity ^0.8.6;
 
 import "./EscrowFactory.sol";
-import "./EscrowSrc.sol";
-import "./EscrowDst.sol";
 
 contract Resolver {
     address public owner;
@@ -19,22 +17,24 @@ contract Resolver {
         factory = EscrowFactory(_factory);
     }
 
-    function deploySrcEscrow(address taker, bytes32 hashlock, uint256 timelock)
+    function deploySrcEscrow(address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
         external
         payable
         onlyOwner
         returns (address)
     {
-        return factory.deployEscrowSrc{value: msg.value}(taker, hashlock, timelock);
+        return factory.deployEscrowSrc{value: msg.value}(taker, hashlock, timelock, tokenAddress);
     }
 
-    function deployDstEscrow(address maker, address taker, bytes32 hashlock, uint256 timelock)
-        external
-        payable
-        onlyOwner
-        returns (address)
-    {
-        return factory.deployEscrowDst{value: msg.value}(maker, taker, hashlock, timelock);
+    function deployDstEscrow(
+        address maker,
+        address taker,
+        bytes32 hashlock,
+        uint256 timelock,
+        address tokenAddress,
+        uint256 amount
+    ) external onlyOwner returns (address) {
+        return factory.deployEscrowDst(maker, taker, hashlock, timelock, tokenAddress, amount);
     }
 
     function withdrawFromEscrow(address escrow, bytes32 secret) external onlyOwner {
