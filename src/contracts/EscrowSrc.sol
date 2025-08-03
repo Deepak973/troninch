@@ -12,6 +12,7 @@ contract EscrowSrc {
     bool public withdrawn;
     bool public canceled;
     bool private initialized;
+    bool public locked;
 
     modifier onlyTaker() {
         require(msg.sender == taker, "Only taker");
@@ -38,6 +39,17 @@ contract EscrowSrc {
         timelock = _timelock;
         tokenAddress = _tokenAddress;
         initialized = true;
+    }
+
+    /// @notice Lock ERC20 tokens into the escrow after approval
+    /// @param amount Amount of tokens to lock
+    function lock(uint256 amount) external onlyMaker notInactive {
+        require(tokenAddress != address(0), "Native token not supported in lock()");
+        require(!locked, "Already locked");
+        locked = true;
+
+        bool success = IERC20(tokenAddress).transferFrom(msg.sender, address(this), amount);
+        require(success, "Token transfer failed");
     }
 
     function withdraw(bytes32 secret) external onlyTaker notInactive {

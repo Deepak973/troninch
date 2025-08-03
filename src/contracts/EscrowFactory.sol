@@ -8,13 +8,13 @@ contract EscrowFactory {
     event EscrowSrcDeployed(address indexed escrow);
     event EscrowDstDeployed(address indexed escrow);
 
-    function deployEscrowSrc(address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
+    function deployEscrowSrc(address maker, address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
         external
         payable
         returns (address)
     {
         EscrowSrc escrow = new EscrowSrc();
-        escrow.initialize(msg.sender, taker, hashlock, timelock, tokenAddress);
+        escrow.initialize(maker, taker, hashlock, timelock, tokenAddress);
 
         if (msg.value > 0) {
             (bool sent,) = address(escrow).call{value: msg.value}("");

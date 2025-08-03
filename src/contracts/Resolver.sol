@@ -17,13 +17,13 @@ contract Resolver {
         factory = EscrowFactory(_factory);
     }
 
-    function deploySrcEscrow(address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
+    function deploySrcEscrow(address maker, address taker, bytes32 hashlock, uint256 timelock, address tokenAddress)
         external
         payable
         onlyOwner
         returns (address)
     {
-        return factory.deployEscrowSrc{value: msg.value}(taker, hashlock, timelock, tokenAddress);
+        return factory.deployEscrowSrc{value: msg.value}(maker, taker, hashlock, timelock, tokenAddress);
     }
 
     function deployDstEscrow(

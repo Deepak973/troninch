@@ -34,8 +34,8 @@ forge script script/deploy/DeployUSDC.s.sol --rpc-url sepolia --broadcast -vvvv
 
 ### Deployed Addresses:
 
-- **Resolver**: `0x5E69CdDD16F334EB662601e2020501776cbb0589`
-- **Escrow Factory**: `0xAaF4a298fa52649DeFdbe4e8f8a0f5eAB8e2985E`
+- **Resolver**: `0x6F3B56E2f0571e819D1Aa1cb606105A67645F83a`
+- **Escrow Factory**: `0x331Da6517Bd9c9991224227e7D118B7ae313796e`
 - **USDC Token**: `0xaA329d7B6B8016C7e94642FD46EeF999C5DB3CAd`
 
 ---

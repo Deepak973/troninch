@@ -12,6 +12,7 @@ contract EscrowDst {
     bytes32 public hashlock;
     bool public withdrawn;
     bool public canceled;
+    bool public locked;
 
     constructor(
         address _maker,
@@ -44,11 +45,20 @@ contract EscrowDst {
         _;
     }
 
+    /// @notice Lock tokens into this escrow on destination chain
+    function lock() external onlyMaker notInactive {
+        require(!locked, "Already locked");
+        locked = true;
+
+        bool success = IERC20(tokenAddress).transferFrom(msg.sender, address(this), amount);
+        require(success, "Token transfer failed");
+    }
+
     function withdraw(bytes32 secret) external onlyTaker notInactive {
+        require(locked, "Tokens not locked yet");
         require(sha256(abi.encodePacked(secret)) == hashlock, "Invalid secret");
         withdrawn = true;
 
-        // Transfer the tokens to the taker
         bool success = IERC20(tokenAddress).transfer(taker, amount);
         require(success, "Token transfer failed");
     }
@@ -57,7 +67,6 @@ contract EscrowDst {
         require(block.timestamp >= timelock, "Too early to cancel");
         canceled = true;
 
-        // Refund tokens to maker
         bool success = IERC20(tokenAddress).transfer(maker, amount);
         require(success, "Refund to maker failed");
     }
